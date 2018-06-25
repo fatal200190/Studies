@@ -27,18 +27,18 @@ public class Anagrams {
 	
 	public static String reverseWord(String word){
 		char [] letters = word.toCharArray();
-		int r = letters.length - 1, l = 0;
-        while (l < r){
-            if (!Character.isLetter(letters[l]))
-                l++;
-            else if(!Character.isLetter(letters[r]))
-                r--;
+		int countFromRight = letters.length - 1, countFromLeft = 0;
+        while (countFromLeft < countFromRight){
+            if (!Character.isLetter(letters[countFromLeft]))
+            	countFromLeft++;
+            else if(!Character.isLetter(letters[countFromRight]))
+            	countFromRight--;
             else{
-                char tmp = letters[l];
-                letters[l] = letters[r];
-                letters[r] = tmp;
-                l++;
-                r--;
+                char tmp = letters[countFromLeft];
+                letters[countFromLeft] = letters[countFromRight];
+                letters[countFromRight] = tmp;
+                countFromLeft++;
+                countFromRight--;
             }
         }
         return new String(letters);
