@@ -14,10 +14,10 @@ public class Anagrams {
 		if(str.isEmpty()) {
 			return str;
 		}
-		String[] words = str.split(" ");
+		final String[] WORDS = str.split(" ");
 		String revString = "";
 		String temp = "";
-		for(String word : words) {
+		for(String word : WORDS) {
 			temp = reverseWord(word);
 			revString = revString + temp + " ";
 			temp = "";
@@ -25,9 +25,12 @@ public class Anagrams {
 		return revString.trim();
 	}
 	
-	public static String reverseWord(String word){
+	private static String reverseWord(String word){
+		
 		char [] letters = word.toCharArray();
-		int countFromRight = letters.length - 1, countFromLeft = 0;
+		int countFromRight = letters.length - 1; 
+		int countFromLeft = 0;
+		
         while (countFromLeft < countFromRight){
             if (!Character.isLetter(letters[countFromLeft]))
             	countFromLeft++;
