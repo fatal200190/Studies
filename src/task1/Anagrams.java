@@ -1,26 +1,28 @@
 package task1;
 
 public class Anagrams {
-
-	public static void main(String[] args) throws Exception {
-		String str = "a1bcd1 efg!h";
+	
+	private static final String DELIMITER = " ";
+	
+	public static void main(String[] args) {
+		String str = "               ";
 		System.out.println(reverseString(str));
 	}
 	
-	public static String reverseString (String str) throws Exception {
-		if (str == null) {
-				throw new Exception("String can not be null");
-			}
-		if(str.isEmpty()) {
-			return str;
-		}
-		final String[] WORDS = str.split(" ");
-		StringBuffer reversedPhrase = new StringBuffer();
+	public static String reverseString (String str) {
 		
-		for(String word : WORDS) {
-			reversedPhrase = reversedPhrase.append(reverseWord(word)).append(" ");
+		String[] words = str.split(DELIMITER);
+		StringBuffer reversedPhrase = new StringBuffer();
+
+		if((str == null) || (str.isEmpty())) {
+		return str;
+		}else {
+		
+		for(String word : words) {
+			reversedPhrase = reversedPhrase.append(reverseWord(word)).append(DELIMITER);
 		}
-		return reversedPhrase.toString().substring(0, reversedPhrase.toString().length() - 1);
+		return deleteDelimiterInTheEnd(reversedPhrase);
+		}
 	}
 	
 	private static String reverseWord(String word){
@@ -48,4 +50,11 @@ public class Anagrams {
         }
         return new String(letters);
     }
+	
+	private static String deleteDelimiterInTheEnd (StringBuffer phrase) {
+		if(phrase.length() > 0) {
+		return phrase.toString().substring(0, phrase.length() - 1);
+		}else 
+			return phrase.toString();
+	}
 }
