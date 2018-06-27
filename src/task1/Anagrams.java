@@ -5,51 +5,57 @@ public class Anagrams {
 	private static final String DELIMITER = " ";
 	
 	public static void main(String[] args) {
-		String str = "               ";
+		String str = "abc";
 		System.out.println(reverseString(str));
 	}
 	
 	public static String reverseString (String str) {
 		
+		if((str == null) || (str.isEmpty())) 
+		return str;
+		str.trim();
 		String[] words = str.split(DELIMITER);
 		StringBuffer reversedPhrase = new StringBuffer();
-
-		if((str == null) || (str.isEmpty())) {
-		return str;
-		}else {
-		
 		for(String word : words) {
 			reversedPhrase = reversedPhrase.append(reverseWord(word)).append(DELIMITER);
 		}
-		return deleteDelimiterInTheEnd(reversedPhrase);
+		return deleteDelimiterInTheEnd(reversedPhrase) + spacesInTheEndOfPhrase(str);
 		}
-	}
+	
+	
+
 	
 	private static String reverseWord(String word){
 		
 		char [] letters = word.toCharArray();
-		int countFromRight = letters.length - 1; 
-		int countFromLeft = 0;
+		int countFromRightBarder = letters.length - 1; 
+		int countFromLeftBoarder = 0;
 		
-        while (countFromLeft < countFromRight){
-            if (!Character.isLetter(letters[countFromLeft])) {
-            	countFromLeft++;
+        while (countFromLeftBoarder < countFromRightBarder){
+            if (!Character.isLetter(letters[countFromLeftBoarder])) {
+            	countFromLeftBoarder++;
             	}
             else {
-            	if(!Character.isLetter(letters[countFromRight])) {
-            	countFromRight--;
+            	if(!Character.isLetter(letters[countFromRightBarder])) {
+            	countFromRightBarder--;
             	}
+            	
             	else{
-                char tmp = letters[countFromLeft];
-                letters[countFromLeft] = letters[countFromRight];
-                letters[countFromRight] = tmp;
-                countFromLeft++;
-                countFromRight--;
+            	swapLetters(letters, countFromLeftBoarder, countFromRightBarder);
+                countFromLeftBoarder++;
+                countFromRightBarder--;
             	}
             }
         }
         return new String(letters);
     }
+	
+	private static void swapLetters (char [] letters, int countFromLeftBoarder, 
+			int countFromRightBarder) {
+        char tmp = letters[countFromLeftBoarder];
+        letters[countFromLeftBoarder] = letters[countFromRightBarder];
+        letters[countFromRightBarder] = tmp;
+	}
 	
 	private static String deleteDelimiterInTheEnd (StringBuffer phrase) {
 		if(phrase.length() > 0) {
@@ -57,4 +63,17 @@ public class Anagrams {
 		}else 
 			return phrase.toString();
 	}
+	
+	   private static String spacesInTheEndOfPhrase(String phrase) {
+	        int len = phrase.length();
+	        char[] letters = phrase.toCharArray();
+	        String spaces = "";
+
+	        while ((letters[len - 1] <= ' ')) {
+	            len--;
+	            spaces+=' ';
+	        }
+	        return ((len < letters.length)) ? spaces : "";
+	    }
+
 }
