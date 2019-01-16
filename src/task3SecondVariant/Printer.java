@@ -2,55 +2,55 @@ package task3SecondVariant;
 
 public class Printer {
 	private StringBuffer result = new StringBuffer();
-	private Calculate calculate = new Calculate();
+	private Calculator calculator;
 
-	public Printer(Calculate calculate) {
-		super();
-		this.calculate = calculate;
+	public Printer(Calculator calculator) {
+		this.calculator = calculator;
 	}
 
-	public StringBuffer printResult() {
+	public String printResult() {
 		int minuedIndex = 0;
 		int subtrahendIndex = 0;
 		int textIndex;
-		for (textIndex = 0; textIndex < calculate.getMinuendIndexesList().size() - 1; textIndex++) {
-			String fisrstLine = puttingStringInPosition(calculate.getMinuendIndexesList().get(textIndex) + 2,
-					"_" + String.valueOf(calculate.getMinuendList().get(minuedIndex)));
+		for (textIndex = 0; textIndex < calculator.getMinuendIndexesList().size() - 1; textIndex++) {
+			String fisrstLine = puttingStringInPosition(calculator.getMinuendIndexesList().get(textIndex) + 2,
+					"_" + String.valueOf(calculator.getMinuendList().get(minuedIndex)));
 			result.append(fisrstLine).append("\n");
-			String secondLine = puttingStringInPosition(calculate.getMinuendIndexesList().get(textIndex) + 2,
-					String.valueOf(calculate.getSubtrahendList().get(subtrahendIndex)));
+			String secondLine = puttingStringInPosition(calculator.getMinuendIndexesList().get(textIndex) + 2,
+					String.valueOf(calculator.getSubtrahendList().get(subtrahendIndex)));
 			result.append(secondLine).append("\n");
-			String separator = puttingStringInPosition(calculate.getMinuendIndexesList().get(textIndex) + 2,
-					addingString((int) Math.log10(calculate.getMinuendList().get(minuedIndex)) + 1, "-"));
+			String separator = puttingStringInPosition(calculator.getMinuendIndexesList().get(textIndex) + 2,
+					addingString((int) Math.log10(calculator.getMinuendList().get(minuedIndex)) + 1, "-"));
 			result.append(separator).append("\n");
 			minuedIndex++;
 			subtrahendIndex++;
 		}
-		String lastLine = puttingStringInPosition(calculate.getMinuendIndexesList().get(textIndex) + 2,
-				String.valueOf(calculate.getMinuendList().get(minuedIndex)));
+		String lastLine = puttingStringInPosition(calculator.getMinuendIndexesList().get(textIndex) + 2,
+				String.valueOf(calculator.getMinuendList().get(minuedIndex)));
 		result.append(lastLine).append("\n");
 
-		formFirstThreeLines();
-		return result;
+		formingFirstThreeLines();
+		
+		return String.valueOf(result);
 	}
 
-	private void formFirstThreeLines() {
+	private void formingFirstThreeLines() {
 		String[] lines = result.toString().split("\n");
-		int index =(int)Math.log10(calculate.getDividend())+2 - lines[1].length();
+		int index =(int)Math.log10(calculator.getDividend())+2 - lines[1].length();
 		if(index > 0) {
-			lines[0] = "_" + calculate.getDividend() + "|" + calculate.getDivisor();
+			lines[0] = "_" + calculator.getDividend() + "|" + calculator.getDivisor();
 			lines[1] += String.format("%" + index + "s", puttingStringInPosition(index," ")) + "|" + addingString(findingLongesBetweenDivAndQuot(), "-");
-			lines[2] += String.format("%" + index + "s", puttingStringInPosition(index," ")) + "|" + calculate.getQuotient();
+			lines[2] += String.format("%" + index + "s", puttingStringInPosition(index," ")) + "|" + calculator.getQuotient();
 		}
 		if(index < 0) {
-			lines[0] = "_" + calculate.getDividend() +String.format("%" + index + "s", puttingStringInPosition(index," ")) + "|" + calculate.getDivisor();
+			lines[0] = "_" + calculator.getDividend() +String.format("%" + index + "s", puttingStringInPosition(index," ")) + "|" + calculator.getDivisor();
 			lines[1] = lines[1] + "|" + addingString(findingLongesBetweenDivAndQuot(), "-");
-			lines[2] = lines[2] + "|" + calculate.getQuotient().toString();
+			lines[2] = lines[2] + "|" + calculator.getQuotient().toString();
 		}
 		if(index == 0) {
-			lines[0] = "_" + calculate.getDividend() + "|" + calculate.getDivisor();
+			lines[0] = "_" + calculator.getDividend() + "|" + calculator.getDivisor();
 			lines[1] = lines[1] + "|" + addingString(findingLongesBetweenDivAndQuot(), "-");
-			lines[2] = lines[2] + "|" + calculate.getQuotient().toString();
+			lines[2] = lines[2] + "|" + calculator.getQuotient().toString();
 		}
 		
 		
@@ -62,9 +62,9 @@ public class Printer {
 	}
 
 	private int findingLongesBetweenDivAndQuot() {
-		return (int) Math.log10(calculate.getDividend() + 1) >= calculate.getQuotient().length()
-				? (int) Math.log10(calculate.getDividend() + 1)
-				: calculate.getQuotient().length();
+		return (int) Math.log10(calculator.getDividend() + 1) >= calculator.getQuotient().length()
+				? (int) Math.log10(calculator.getDividend() + 1)
+				: calculator.getQuotient().length();
 	}
 
 	private String puttingStringInPosition(int position, String str) {

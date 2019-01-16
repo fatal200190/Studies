@@ -13,8 +13,8 @@ public class DivisionTest {
         		" 4|-\n" + 
         		" -|2\n" + 
         		" 0\n";
-		Calculate div = new Calculate(4,2,0);
-		div.division();
+		Calculator div = new Calculator(0);
+		div.makeADivision(4, 2);
 		Printer printer = new Printer(div);
 		assertEquals(expected, printer.printResult().toString());
 	}
@@ -30,8 +30,8 @@ public class DivisionTest {
         		" --\n"+
         		"  0\n"
         		;
-		Calculate div = new Calculate(5,2,3);
-		div.division();
+		Calculator div = new Calculator(3);
+		div.makeADivision(5, 2);
 		Printer printer = new Printer(div);
 		assertEquals(expected, printer.printResult().toString());
 	}
@@ -50,8 +50,8 @@ public class DivisionTest {
         		"   --\n"+
         		"    1\n"
         		;
-		Calculate div = new Calculate(1,3,3);
-		div.division();
+		Calculator div = new Calculator(3);
+		div.makeADivision(1, 3);
 		Printer printer = new Printer(div);
 		assertEquals(expected, printer.printResult().toString());
 	}
@@ -73,8 +73,8 @@ public class DivisionTest {
         		"     ----\n"+
         		"       10\n"
         		;
-		Calculate div = new Calculate(1,666,7);
-		div.division();
+		Calculator div = new Calculator(7);
+		div.makeADivision(1, 666);
 		Printer printer = new Printer(div);
 		assertEquals(expected, printer.printResult().toString());
 	}
@@ -82,16 +82,16 @@ public class DivisionTest {
 	
 	@Test(expected = Exception.class)
 	public void testSimpleDivisionDivisorNull() throws Exception {
-		Calculate div = new Calculate(1,0,3);
-		div.division();
+		Calculator div = new Calculator(3);
+		div.makeADivision(1, 0);
 		Printer printer = new Printer(div);
 		printer.printResult();
 	}
 	
 	@Test(expected = Exception.class)
 	public void testSimpleDividendDivisorNull() throws Exception {
-		Calculate div = new Calculate(0,1,3);
-		div.division();
+		Calculator div = new Calculator(3);
+		div.makeADivision(0, 1);
 		Printer printer = new Printer(div);
 		printer.printResult();
 	}

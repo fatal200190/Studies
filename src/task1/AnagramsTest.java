@@ -30,6 +30,7 @@ public class AnagramsTest {
 		assertEquals(null,result);
 	}
 	
+	@Test
 	public void testEmptyString() {
 		String result = Anagrams.reverseString("");
 		assertEquals("",result);

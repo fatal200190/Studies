@@ -5,7 +5,6 @@ public class Anagrams {
 	private static final String DELIMITER = " ";
 
 	public static String reverseString(String str) {
-
 		if ((str == null) || (str.isEmpty())) {
 			return str;
 		}
@@ -19,7 +18,6 @@ public class Anagrams {
 	}
 
 	private static String reverseWord(String word) {
-
 		char[] letters = word.toCharArray();
 		int countFromRightBoarder = letters.length - 1;
 		int countFromLeftBoarder = 0;
